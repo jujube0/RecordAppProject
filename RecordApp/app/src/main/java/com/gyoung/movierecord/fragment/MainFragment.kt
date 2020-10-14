@@ -1,34 +1,23 @@
 package com.gyoung.movierecord.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gyoung.movierecord.R
+import com.gyoung.movierecord.adapter.ShowPostListAdapter
+import com.gyoung.movierecord.data.PostItem
+import com.gyoung.movierecord.function.customEnqueue
+import com.gyoung.movierecord.network.RequestToServer
+import kotlinx.android.synthetic.main.fragment_main.*
+import java.lang.Exception
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class MainFragment(val index : Int) : Fragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MainFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class MainFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    var datas = mutableListOf<PostItem>()
+    lateinit var rv_adapter : ShowPostListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,23 +27,47 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MainFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MainFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        rv_adapter = ShowPostListAdapter(view.context)
+        rv_adapter.datas = datas
+        rv_mainFrag.adapter = rv_adapter
+        super.onViewCreated(view, savedInstanceState)
     }
+
+    override fun onStart() {
+        super.onStart()
+        try{
+            getPosts()
+        }catch (e : Exception){
+            Log.d("MainFrag", e.message.toString())
+        }
+    }
+
+    fun getPosts(){
+        datas = mutableListOf()
+        RequestToServer.mainService.getPosts()
+            .customEnqueue(
+                onSuccess = { item ->
+                    datas.addAll(item)
+                    Log.d("MainFrag", datas.toString())
+
+                    if(index == 1){
+                        datas = datas.filter{
+                            it.type == "movie"
+                        } as MutableList<PostItem>
+                    }else if(index == 2){
+                        datas = datas.filter{
+                            it.type == "book"
+                        } as MutableList<PostItem>
+                    }
+
+                    rv_adapter.datas = datas
+                    rv_adapter.notifyDataSetChanged()
+                },
+                onError = {e -> Log.d("MainFrag",e.message() )},
+                onFail = {}
+            )
+
+    }
+
 }

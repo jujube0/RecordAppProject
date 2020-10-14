@@ -8,7 +8,9 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import com.bumptech.glide.Glide
 import com.gyoung.movierecord.data.RatingMakePostAdapter
+import com.gyoung.movierecord.data.RequestSendPost
 import com.gyoung.movierecord.function.customEnqueue
+import com.gyoung.movierecord.function.showCustomToast
 import com.gyoung.movierecord.network.RequestToServer
 import kotlinx.android.synthetic.main.activity_make_post.*
 import java.lang.Exception
@@ -44,6 +46,9 @@ class MakePostActivity : AppCompatActivity() {
         btn_changeType_makePost.setOnClickListener {
             isBook = !isBook
             changeType()
+        }
+        btn_confirm_makePost.setOnClickListener {
+            sendPost()
         }
     }
 
@@ -88,6 +93,30 @@ class MakePostActivity : AppCompatActivity() {
             tv_title_makePost.text = "영화 제목"
             tv_author_makePost.text = "개봉일"
             btn_changeType_makePost.text = "책으로 변경"
+        }
+    }
+
+    fun sendPost(){
+        try{
+            RequestToServer.mainService.sendPost(
+                RequestSendPost(
+                    content = tv_content_makePost.text.toString(),
+                    title = tv_title_makePost.text.toString(),
+                    type = if(isBook) "book" else "movie",
+                    rate_count = ratingAdapter.clickdIdx,
+                    author = if(isBook) et_author_makePost.text.toString() else null,
+                    release_date = if(isBook) null else et_author_makePost.text.toString(),
+                    img_url = if(thumbnail.isNullOrBlank()) null else thumbnail
+                )
+            ).customEnqueue(
+                onSuccess = {
+                    finish()
+                },
+                onFail = {},
+                onError = { e -> showCustomToast(e.message())}
+            )
+        }catch (e : Exception){
+            showCustomToast(e.message.toString())
         }
     }
 

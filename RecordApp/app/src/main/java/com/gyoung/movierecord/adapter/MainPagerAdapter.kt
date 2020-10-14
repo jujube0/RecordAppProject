@@ -8,10 +8,8 @@ import com.gyoung.movierecord.fragment.MainFragment
 class MainPagerAdapter(fm : FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     override fun getItem(position: Int): Fragment {
         return when(position){
-            0 -> MainFragment()
-            1 -> MainFragment()
-            2 -> MainFragment()
-            else -> MainFragment()
+            0,1,2 -> MainFragment(position)
+            else -> MainFragment(position)
         }
     }
 

@@ -1,11 +1,8 @@
 package com.gyoung.movierecord.network
 
-import com.gyoung.movierecord.data.ResponseMovieSearch
-import com.gyoung.movierecord.data.ResponseSearchBook
+import com.gyoung.movierecord.data.*
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface RequestInterface {
     @GET("/v3/search/book")
@@ -22,5 +19,13 @@ interface RequestInterface {
         @Query("page") page : Int = 1,
         @Query("language") k : String = "ko-KO"
     ) : Call<ResponseMovieSearch>
+
+    @GET("/post")
+    fun getPosts() : Call<ResponseGetPosts>
+
+    @POST("/post")
+    fun sendPost(
+        @Body body : RequestSendPost
+    ) : Call<ResponseSimple>
 
 }

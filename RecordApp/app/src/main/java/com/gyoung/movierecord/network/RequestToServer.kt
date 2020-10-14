@@ -14,8 +14,14 @@ object RequestToServer {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
+    var mainRetrofit = Retrofit.Builder()
+        .baseUrl("http://192.168.0.8:3000")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
 
     var kakaoService: RequestInterface = kakaoRetrofit.create(RequestInterface::class.java)
     var movieService = movieRetrofit.create(RequestInterface::class.java)
+    var mainService = mainRetrofit.create(RequestInterface::class.java)
 
 }
