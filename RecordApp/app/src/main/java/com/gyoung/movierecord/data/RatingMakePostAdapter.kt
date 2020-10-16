@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.item_rating_make_post.view.*
 class RatingMakePostAdapter(private val context: Context): RecyclerView.Adapter<RatingMakePostHolder>() {
 
     var clickdIdx = 0
+    var clickedEnabled = true
 
   	// xml file을 inflate한 후 viewHolder를 만든다.
       override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):  RatingMakePostHolder{
@@ -29,10 +30,12 @@ class RatingMakePostAdapter(private val context: Context): RecyclerView.Adapter<
           }else{
               holder.setUnSeleced()
           }
+          holder.itemView.isEnabled = clickedEnabled
           holder.itemView.setOnClickListener {
               clickdIdx = position
               this.notifyDataSetChanged()
           }
+
       }
   }
 

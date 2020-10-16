@@ -64,4 +64,6 @@ dependencies {
 
     //kakao
     implementation "com.kakao.sdk:v2-user:2.0.3" // 카카오 로그인
+    // textview around img
+    implementation 'com.github.deano2390:FlowTextView:2.0.5'
 }

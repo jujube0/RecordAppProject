@@ -28,4 +28,21 @@ interface RequestInterface {
         @Body body : RequestSendPost
     ) : Call<ResponseSimple>
 
+    // 게시물 세부 정보 가져오기
+    @GET("/post/detail/{post_id}")
+    fun getPostDetail(
+        @Path("post_id") post_id : String
+    ) : Call<PostItem>
+
+    // 게시글 삭제하기
+    @DELETE("/post/detail/{post_id}")
+    fun deletePostDetail(
+        @Path("post_id") post_id : String
+    ) : Call < ResponseSimple>
+
+    @PATCH("/post/detail/{post_id}")
+    fun patchPostDetail(
+        @Path("post_id") post_id: String,
+        @Body postItem : PostItem
+    ) : Call<ResponseSimple>
 }

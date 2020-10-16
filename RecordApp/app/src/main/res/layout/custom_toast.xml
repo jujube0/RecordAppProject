@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toast_layout"
+    android:backgroundTint="@color/colorAccent"
     android:layout_height="wrap_content"
     android:background="@drawable/rec20"
     android:layout_marginTop="16dp">
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:textSize="12sp"
         tools:text="hello"
-        android:textColor="@color/text_dark"
+        android:textColor="@color/white"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="9dp"

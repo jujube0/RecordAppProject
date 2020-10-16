@@ -19,6 +19,8 @@ class MainFragment(val index : Int) : Fragment() {
     var datas = mutableListOf<PostItem>()
     lateinit var rv_adapter : ShowPostListAdapter
 
+    constructor() : this(0)
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
