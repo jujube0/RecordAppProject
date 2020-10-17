@@ -21,6 +21,7 @@ import com.gyoung.movierecord.function.customEnqueue
 import com.gyoung.movierecord.function.showCustomToast
 import com.gyoung.movierecord.network.RequestToServer
 import kotlinx.android.synthetic.main.activity_post_detail.*
+import java.util.Collections.max
 
 class PostDetailActivity : AppCompatActivity() {
 
@@ -35,7 +36,9 @@ class PostDetailActivity : AppCompatActivity() {
         adapter_rating.clickedEnabled=false
         rv_rating_postDetail.adapter = adapter_rating
 
-//        getPost()
+        Glide.with(this).load("https://image.tmdb.org/t/p/w185//g28YoFNifbZsyFoIVLsMuIcsh9X.jpg").into(iv_img_postDetail)
+
+
 
         btn_back_postDetail.setOnClickListener { finish() }
 
@@ -48,6 +51,8 @@ class PostDetailActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onStart() {
         super.onStart()
+
+
         getPost()
     }
 
@@ -78,6 +83,8 @@ class PostDetailActivity : AppCompatActivity() {
                             makeSpan(height,width)
                         }
                     })
+
+
                 },
                 onFail = {},
                 onError = {r -> Log.d("PostDetail", r.message())}
@@ -96,6 +103,8 @@ class PostDetailActivity : AppCompatActivity() {
 
         val fontSpacing = tv_content_postDetail.paint.fontSpacing
         lines = height / fontSpacing.toInt() +1
+        lines = if(lines>10)lines else 10
+        Log.d("PostDetail", "${lines}}")
 
         val span = MyLeadingMarginSpan2(lines, width + 10)
         var st = SpannableString(text)
@@ -129,6 +138,7 @@ class PostDetailActivity : AppCompatActivity() {
         val dialog = AlertDialog.Builder(this, R.style.CustomDesign)
         dialog.setTitle("게시글을 정말 삭제하시겠습니까?")
         dialog.setPositiveButton("예", object : DialogInterface.OnClickListener{
+
             override fun onClick(dialog: DialogInterface?, p1: Int) {
                 RequestToServer.mainService.deletePostDetail(post_id)
                     .customEnqueue(

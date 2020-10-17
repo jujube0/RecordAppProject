@@ -113,7 +113,7 @@ class MakePostActivity : AppCompatActivity() {
                     finish()
                 },
                 onFail = {},
-                onError = { e -> showCustomToast(e.message())}
+                onError = { e -> showCustomToast("내용을 모두 채워주세요")}
             )
         }catch (e : Exception){
             showCustomToast(e.message.toString())
