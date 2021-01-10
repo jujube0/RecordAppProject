@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "893610243634",
+    "project_id": "recordmovieproject",
+    "storage_bucket": "recordmovieproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:893610243634:android:2d6faa501c2f655aa1ae2b",
+        "android_client_info": {
+          "package_name": "com.gyoung.movierecord"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "893610243634-tddmpt74hvr5qhcr4gi1l7vuh1r893pc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANudCe6azRG-iQt2Kx1AbdTTv0569Pn30"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "893610243634-tddmpt74hvr5qhcr4gi1l7vuh1r893pc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

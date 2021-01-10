@@ -19,9 +19,9 @@ fun<ResponseType> Call<ResponseType>.customEnqueue(
         override fun onResponse(call: Call<ResponseType>, response: Response<ResponseType>) {
             response.body()?.let{
                 onSuccess(it)
-
             }?:onError(response)
+
+            Log.d("networkaa", response.toString() + call.toString())
         }
     })
-
 }

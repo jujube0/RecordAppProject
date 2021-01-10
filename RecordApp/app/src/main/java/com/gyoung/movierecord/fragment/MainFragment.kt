@@ -66,7 +66,7 @@ class MainFragment(val index : Int) : Fragment() {
                     rv_adapter.datas = datas
                     rv_adapter.notifyDataSetChanged()
                 },
-                onError = {e -> Log.d("MainFrag",e.message() )},
+                onError = {e -> Log.d("MainFrag",e.message() + e.body() + e.code() + e.raw())},
                 onFail = {}
             )
 

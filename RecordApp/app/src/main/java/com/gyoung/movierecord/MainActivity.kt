@@ -5,7 +5,10 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.gyoung.movierecord.adapter.MainPagerAdapter
 import io.socket.client.IO
 import io.socket.client.Socket
@@ -19,6 +22,7 @@ import java.net.URISyntaxException
 class MainActivity : AppCompatActivity() {
 
     lateinit var socket: Socket
+    val TAG = "FIREBASE_MESSAGING"
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +32,21 @@ class MainActivity : AppCompatActivity() {
         tabLayout_main.setupWithViewPager(viewPager_main)
         tabLayout_main.setTabTextColors(resources.getColor(R.color.text_dark, null), resources.getColor(R.color.text_brown, null))
         tabLayout_main.setSelectedTabIndicatorColor(resources.getColor(R.color.colorPrimaryDark, null))
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            val msg =token.toString();
+            Log.d(TAG, msg)
+            Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+        })
 
         // 글쓰기 버튼 누르면
         btn_makePost_main.setOnClickListener {

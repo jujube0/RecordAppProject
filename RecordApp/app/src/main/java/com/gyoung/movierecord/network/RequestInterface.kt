@@ -28,6 +28,11 @@ interface RequestInterface {
         @Body body : RequestSendPost
     ) : Call<ResponseSimple>
 
+    @POST("/")
+    fun makeUser(
+        @Body body : RequestSendPost
+    ) : Call<ResponseSimple>
+
     // 게시물 세부 정보 가져오기
     @GET("/post/detail/{post_id}")
     fun getPostDetail(
