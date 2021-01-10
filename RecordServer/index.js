@@ -5,7 +5,7 @@ const app = express();
 const connect = require('./schemas');
 const postRouter = require('./routes/posts');
 const indexRouter = require('./routes');
-const port = 3000;
+const port = 4000;
 
 const admin = require('firebase-admin');
 
