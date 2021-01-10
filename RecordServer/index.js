@@ -9,7 +9,7 @@ const port = 3000;
 
 const admin = require('firebase-admin');
 
-let serAccount = require('./record_movie.json');
+let serAccount = require('./config/record_movie.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serAccount),
