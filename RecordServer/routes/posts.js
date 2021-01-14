@@ -1,8 +1,10 @@
 const express = require('express');
 const Post = require('../schemas/post');
+const controller = require('../controller/postController');
+const upload = require('../modules/multer');
 
 const router = express.Router();
-
+router.post('/post', controller.createPdf);
 router.route('/')
     .get(async (req, res, next) => {
         try{

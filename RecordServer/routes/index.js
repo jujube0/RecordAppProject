@@ -24,15 +24,17 @@ router.route('/').post(async (req, res) => {
 // push PAGE
 router.get('/push_send', function (req, res, next) {
   let target_token ="cpj87payQpGltleGUIrgTU:APA91bEDIbSB5-vyPZiW4uOes5_YsqbaOekAQcyl1sRwWGHCaLPEdEAxfASfBtDsAIKG2wK_ZKRd-0yC77T3OXks-aXX2cbNjt1FGmFAOhnDtdjqoh-LtD3fDyTJtONF5auTLwpcqoAa"
-	//target_token은 푸시 메시지를 받을 디바이스의 토큰값입니다
-
+  //target_token은 푸시 메시지를 받을 디바이스의 토큰값입니다
+  
   let message = {
-    data: {
+    notification: {
       title: '테스트 데이터 발송',
       body: '데이터가 잘 가나요?',
-      hello : 'hh'
     },
     token: target_token,
+  }
+  if (req.body.message) {
+    message.notification.body = req.body.message;
   }
 
   admin
