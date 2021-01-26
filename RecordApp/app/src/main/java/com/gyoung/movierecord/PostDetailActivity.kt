@@ -27,6 +27,7 @@ class PostDetailActivity : AppCompatActivity() {
 
     var post_id : String = ""
     var adapter_rating = RatingMakePostAdapter(this)
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +37,8 @@ class PostDetailActivity : AppCompatActivity() {
         adapter_rating.clickedEnabled=false
         rv_rating_postDetail.adapter = adapter_rating
 
-        Glide.with(this).load("https://image.tmdb.org/t/p/w185//g28YoFNifbZsyFoIVLsMuIcsh9X.jpg").into(iv_img_postDetail)
-
+        // 가장 앞으로
+        tv_title_postDetail.bringToFront()
 
 
         btn_back_postDetail.setOnClickListener { finish() }
@@ -51,12 +52,11 @@ class PostDetailActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onStart() {
         super.onStart()
-
-
         getPost()
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
+    // 게시글 정보 가져오기
     fun getPost(){
         RequestToServer.mainService.getPostDetail(post_id)
             .customEnqueue(
@@ -74,43 +74,12 @@ class PostDetailActivity : AppCompatActivity() {
                     }
                     tv_content_postDetail.text = it.content
 
-                    val vto = iv_img_postDetail.viewTreeObserver
-                    vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener{
-                        override fun onGlobalLayout() {
-                            iv_img_postDetail.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                            val height = iv_img_postDetail.measuredHeight
-                            val width = iv_img_postDetail.measuredWidth
-                            makeSpan(height,width)
-                        }
-                    })
-
-
                 },
                 onFail = {},
                 onError = {r -> Log.d("PostDetail", r.message())}
             )
     }
 
-    private fun makeSpan(height: Int, width: Int) {
-        val allTextStart = 0
-        val text = tv_content_postDetail.text.toString()
-        val allTextEnd = text.length -1
-
-        var lines = 0
-        val bounds = Rect()
-        val b = if(text.length >= 10) 10 else text.length
-        tv_content_postDetail.paint.getTextBounds(text.substring(0,b), 0, 1, bounds )
-
-        val fontSpacing = tv_content_postDetail.paint.fontSpacing
-        lines = height / fontSpacing.toInt() +1
-        lines = if(lines>10)lines else 10
-        Log.d("PostDetail", "${lines}}")
-
-        val span = MyLeadingMarginSpan2(lines, width + 10)
-        var st = SpannableString(text)
-        st.setSpan(span, allTextStart, allTextEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        tv_content_postDetail.setText(st)
-    }
 
     fun setMenu(){
         val dialog = AlertDialog.Builder(this, R.style.CustomDesign)

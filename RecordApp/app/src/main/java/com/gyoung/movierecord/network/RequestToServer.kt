@@ -15,7 +15,12 @@ object RequestToServer {
         .build()
 
     var mainRetrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.0.5:3000")
+        .baseUrl("http://15.164.67.58:4000")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    var retrofit = Retrofit.Builder()
+        .baseUrl("http://15.164.67.58:3000")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
@@ -23,5 +28,6 @@ object RequestToServer {
     var kakaoService: RequestInterface = kakaoRetrofit.create(RequestInterface::class.java)
     var movieService = movieRetrofit.create(RequestInterface::class.java)
     var mainService = mainRetrofit.create(RequestInterface::class.java)
+    var service = retrofit.create(RequestInterface::class.java)
 
 }

@@ -74,6 +74,10 @@ dependencies {
         exclude group: 'org.json', module: 'json'
     }
 
+
+    //stickyscrollview 라이브러리
+    implementation 'com.github.amarjain07:StickyScrollView:1.0.2'
+
     //kakao
     implementation "com.kakao.sdk:v2-user:2.0.3" // 카카오 로그인
     // textview around img

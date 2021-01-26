@@ -51,7 +51,6 @@ class MainFragment(val index : Int) : Fragment() {
             .customEnqueue(
                 onSuccess = { item ->
                     datas.addAll(item)
-                    Log.d("MainFrag", datas.toString())
 
                     if(index == 1){
                         datas = datas.filter{

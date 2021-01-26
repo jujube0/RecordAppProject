@@ -154,7 +154,7 @@ class SearchItemActivity : AppCompatActivity() {
         try{
             val requestToServer = RequestToServer
             requestToServer.kakaoService.searchBook(
-                "KakaoAK " + "a" + getString(R.string.kakao_key_restApi),
+                "KakaoAK ${getString(R.string.kakao_key_restApi)}",
                 query
             ).customEnqueue(
                 onSuccess = {

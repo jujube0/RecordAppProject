@@ -46,6 +46,6 @@ class ShowPostListAdapter(private val context: Context): RecyclerView.Adapter<Sh
             Glide.with(itemView.context).load(data.img_url).into(itemView.iv_item_post)
         }
         itemView.tv_item_title.text = data.title
-        itemView.tv_item_content.text = data.content
+//        itemView.tv_item_content.text = data.content
     }
  }

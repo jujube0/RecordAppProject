@@ -101,7 +101,7 @@ class MakePostActivity : AppCompatActivity() {
             RequestToServer.mainService.sendPost(
                 RequestSendPost(
                     content = tv_content_makePost.text.toString(),
-                    title = tv_title_makePost.text.toString(),
+                    title = et_title_makePost.text.toString(),
                     type = if(isBook) "book" else "movie",
                     rate_count = ratingAdapter.clickdIdx,
                     author = if(isBook) et_author_makePost.text.toString() else null,

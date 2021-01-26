@@ -1,10 +1,20 @@
 package com.gyoung.movierecord.network
 
 import com.gyoung.movierecord.data.*
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface RequestInterface {
+
+    //프로필 변경(햄버거바)
+    @Multipart
+    @PUT("/profiles")
+    fun requestProfile2(
+        @Header("token") token : String,
+        @Part file : MultipartBody.Part?
+    ) : Call<ResponseSimple>
+
     @GET("/v3/search/book")
     fun searchBook(
         @Header("Authorization") token : String,

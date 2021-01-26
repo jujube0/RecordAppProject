@@ -1,58 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.amar.library.ui.StickyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    app:stickyHeader="@id/btn_back_postDetail"
+    app:stickyFooter="@id/tv_content_postDetail"
     tools:context=".PostDetailActivity">
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/scrollView_postDetail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/header_postDetail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="190dp">
+
+            <ImageView
+                android:id="@+id/iv_img_postDetail"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:alpha="0.4"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
 
             <TextView
                 android:id="@+id/tv_title_postDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                tools:text="살아있다"
                 android:textColor="@color/text_dark"
+                android:textSize="30sp"
                 android:textStyle="bold"
-                android:textSize="28dp"
+                android:layout_marginHorizontal="60dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_img_postDetail"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.36"
+                tools:text="살아있다" />
 
             <TextView
                 android:id="@+id/tv_author_postDetail"
+                android:layout_width="115dp"
+                android:layout_height="23dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                android:text="개봉일 2020-01-02"
+                android:gravity="right"
+                android:textColor="@color/text_dark"
+                app:layout_constraintBottom_toTopOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_rating_postDetail"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-
-                android:layout_marginEnd="28dp"
-                android:text="개봉일 2020-01-02"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_title_postDetail" />
+                android:layout_marginBottom="8dp"
+                android:text="작성일 2020-12-20"
+                android:textColor="@color/text_dark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_author_postDetail"
+                app:layout_constraintStart_toStartOf="@+id/tv_author_postDetail" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_rating_postDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:nestedScrollingEnabled="false"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_author_postDetail"
+                app:layout_constraintEnd_toEndOf="@+id/tv_title_postDetail"
+                app:layout_constraintStart_toStartOf="@+id/tv_title_postDetail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title_postDetail"
+                app:layout_constraintVertical_bias="0.465"
                 tools:itemCount="5"
                 tools:listitem="@layout/item_rating_make_post" />
-
-
 
             <ImageView
                 android:id="@+id/btn_back_postDetail"
@@ -62,33 +96,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:src="@drawable/ic_back_arrow" />
-
-
-            <ImageView
-                android:id="@+id/iv_img_postDetail"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                app:layout_constraintDimensionRatio="1"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rv_rating_postDetail"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <TextView
-                android:id="@+id/tv_content_postDetail"
-                android:layout_width="0dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="20dp"
-                android:textColor="@color/text_brown"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/iv_img_postDetail"
-                app:layout_constraintTop_toTopOf="@+id/iv_img_postDetail"
-                tools:text="안녕" />
-
 
 
             <ImageView
@@ -103,6 +110,22 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_content_postDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:textSize="16sp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/text_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"
+            android:text="dkfjsfslkfjsdslkfjsd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_img_postDetail"/>
+
+    </LinearLayout>
+
+</com.amar.library.ui.StickyScrollView>
